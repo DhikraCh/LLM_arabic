@@ -1,10 +1,7 @@
 """
-cleaning.py — the text-cleaning library for Chapter 3
-====================================================
+cleaning.py — the text-cleaning library 
 
-This module holds ALL the text handling for the tokenizer chapter, split into
-the two kinds of cleaning that every real LLM pipeline needs. Keeping them
-separate is one of the main lessons of this chapter.
+holds ALL the text handling for the tokenizer , split into the two kinds of cleaning , seprated
 
 ┌──────────────────────────────────────────────────────────────────────────┐
 │ TYPE A — heavy preparation  (run ONCE, offline, on the raw corpus)         │
@@ -14,7 +11,7 @@ separate is one of the main lessons of this chapter.
 │   time to produce a clean training corpus.                                 │
 │       → prepare_document(), clean_dataframe()                              │
 ├──────────────────────────────────────────────────────────────────────────┤
-│ TYPE B — lightweight normalization  (run EVERY time, train AND inference)  │
+│ TYPE B — lightweight normalization   │
 │   Character-level normalization that MUST be applied identically when we   │
 │   train the tokenizer and when we later encode a user's prompt — otherwise │
 │   the tokens won't line up. Because it must be identical, we express it    │
@@ -59,7 +56,7 @@ def build_normalizer():
         Replace(Regex(r"[ \t]+"), " "),  # collapse spaces/tabs (keep newlines)
     ])
 
-_NORMALIZER = build_normalizer()
+_NORMALIZER = build_normalizer()    #to load once and save it in normalizer
 
 def normalize_text(text):
     """
