@@ -24,4 +24,17 @@ class Tokenizer:
         "[PAD]": PAD, "[UNK]": UNK, "[BOS]": BOS, "[EOS]": EOS, "[SEP]": SEP,
         "[AR]": AR, "[EN]": EN, "[SYS]": SYS, "[USER]": USER, "[ASST]": ASST,
     }
+def __init__(self, backing_tokenizer: BackingTokenizer):
+    self._tokenizer = backing_tokenizer
 
+@classmethod
+def from_file(cls, path=DEFAULT_TOKENIZER_PATH):
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(
+            f"No tokenizer at {path}."
+        )
+
+    return cls(
+        BackingTokenizer.from_file( str(path) )
+    )
